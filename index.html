@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wang</title>
+    <!-- 引入外部库 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css">
+    <!-- 引入自定义样式 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <i class="fas fa-apple-alt"></i>
+                <span class="logo-text">The Wang</span>
+            </a>
+            <div class="nav-links">
+                <a href="#home">首页</a>
+                <a href="#about">关于</a>
+                <a href="#portfolio">作品</a>
+                <a href="#chat">对话</a>
+                <a href="#" class="nav-search">
+                    <i class="fas fa-search"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 首页 -->
+    <section class="hero" id="home">
+        <div class="hero-content" id="heroContent">
+            <h1 class="main-title">The Wang</h1>
+        </div>
+        <div class="hero-image">
+            <div class="image-slider">
+                <div class="slide active" style="background-image: url('images/1.png')"></div>
+                <div class="slide" style="background-image: url('images/2.png')"></div>
+                <div class="slide" style="background-image: url('images/3.png')"></div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <div class="mouse"></div>
+            <div class="arrow"></div>
+        </div>
+    </section>
+
+    <!-- 内容区域 -->
+    <main>
+        <!-- 作品展示 -->
+        <section class="portfolio" id="portfolio">
+            <div class="section-content">
+                <h2>作品展示</h2>
+                <div class="portfolio-grid">
+                    <!-- 作品内容 -->
+                </div>
+            </div>
+        </section>
+
+        <!-- AI对话界面 -->
+        <section class="chat-section" id="chat">
+            <div class="section-content">
+                <h2>智能助手</h2>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <div class="ai-avatar">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div>
+                            <h3>AI Assistant</h3>
+                            <span>在线</span>
+                        </div>
+                    </div>
+                    <div class="chat-messages" id="chatMessages">
+                        <div class="message ai-message">
+                            您好！我是您的智能助手，有什么可以帮您的吗？
+                        </div>
+                    </div>
+                    <div class="chat-input">
+                        <input type="text" id="messageInput" placeholder="输入消息...按回车发送">
+                        <button onclick="sendMessage()">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="social-links">
+            <a href="#" title="哔哩哔哩">bilibili</a>
+            <a href="#" title="微信"><i class="fab fa-weixin"></i></a>
+            <a href="#" title="抖音"><i class="fab fa-tiktok"></i></a>
+        </div>
+        <p>&copy; 2024 The Wang. All rights reserved.</p>
+    </footer>
+
+    <!-- 脚本引用 -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script src="main.js"></script>
+</body>
+
+</html>
