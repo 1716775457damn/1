@@ -21,22 +21,19 @@ function handleTitleScroll() {
     const triggerPoint = window.innerHeight * 0.3;
 
     if (scrollPosition > triggerPoint) {
-        // 当滚动超过触发点时，隐藏标题
         heroContent.style.opacity = '0';
         heroContent.style.transform = 'translate(-50%, -100%) scale(0.5)';
         setTimeout(() => {
-            heroContent.style.display = 'none';
-        }, 800); // 等待过渡动画完成后隐藏
+            heroContent.style.visibility = 'hidden';
+        }, 500);
     } else {
-        // 回到顶部时显示标题
-        heroContent.style.display = 'block';
-        setTimeout(() => {
-            const progress = scrollPosition / triggerPoint;
-            const scale = 1 - (0.5 * progress);
-            const topPosition = 50 - (progress * 50);
-            heroContent.style.opacity = 1 - progress;
-            heroContent.style.transform = `translate(-50%, -${topPosition}%) scale(${scale})`;
-        }, 10);
+        heroContent.style.visibility = 'visible';
+        const progress = scrollPosition / triggerPoint;
+        const scale = 1 - (0.5 * progress);
+        const opacity = 1 - progress;
+        
+        heroContent.style.opacity = opacity;
+        heroContent.style.transform = `translate(-50%, -50%) scale(${scale})`;
     }
 }
 
@@ -204,3 +201,152 @@ messageInput.addEventListener('focus', function() {
 messageInput.addEventListener('blur', function() {
     this.parentElement.classList.remove('focused');
 });
+
+// 添加滚动显示动画
+function handleScrollAnimation() {
+    const elements = document.querySelectorAll('.fade-in');
+    elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementBottom = element.getBoundingClientRect().bottom;
+        const isVisible = (elementTop < window.innerHeight - 100) && (elementBottom >= 0);
+        
+        if (isVisible) {
+            element.classList.add('visible');
+        }
+    });
+}
+
+// 添加鼠标跟随效果
+function initCursor() {
+    const cursor = document.createElement('div');
+    cursor.className = 'cursor';
+    document.body.appendChild(cursor);
+
+    document.addEventListener('mousemove', e => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mousedown', () => cursor.classList.add('active'));
+    document.addEventListener('mouseup', () => cursor.classList.remove('active'));
+}
+
+// 图片预览功能
+function initImagePreview() {
+    const modal = document.getElementById('imagePreviewModal');
+    const previewImage = document.getElementById('previewImage');
+    const portfolioItems = document.querySelectorAll('.portfolio-item');
+    let currentImageIndex = 0;
+
+    // 打开预览
+    portfolioItems.forEach((item, index) => {
+        item.addEventListener('click', () => {
+            const imgSrc = item.querySelector('img').src;
+            previewImage.src = imgSrc;
+            currentImageIndex = index;
+            modal.style.display = 'block';
+            setTimeout(() => modal.classList.add('active'), 10);
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // 关闭预览
+    document.querySelector('.close-modal').addEventListener('click', closePreview);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closePreview();
+    });
+
+    // 切换图片
+    document.querySelector('.prev-image').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex - 1 + portfolioItems.length) % portfolioItems.length;
+        updatePreviewImage();
+    });
+
+    document.querySelector('.next-image').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentImageIndex = (currentImageIndex + 1) % portfolioItems.length;
+        updatePreviewImage();
+    });
+
+    function updatePreviewImage() {
+        const newSrc = portfolioItems[currentImageIndex].querySelector('img').src;
+        previewImage.style.opacity = '0';
+        setTimeout(() => {
+            previewImage.src = newSrc;
+            previewImage.style.opacity = '1';
+        }, 300);
+    }
+
+    function closePreview() {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }, 300);
+    }
+
+    // 键盘控制
+    document.addEventListener('keydown', (e) => {
+        if (!modal.classList.contains('active')) return;
+        
+        switch(e.key) {
+            case 'Escape':
+                closePreview();
+                break;
+            case 'ArrowLeft':
+                document.querySelector('.prev-image').click();
+                break;
+            case 'ArrowRight':
+                document.querySelector('.next-image').click();
+                break;
+        }
+    });
+}
+
+// 初始化
+window.addEventListener('load', () => {
+    initCursor();
+    initImagePreview();
+    // 为所有需要动画的元素添加 fade-in 类
+    document.querySelectorAll('.portfolio-item, .section-content h2').forEach(el => {
+        el.classList.add('fade-in');
+    });
+});
+
+window.addEventListener('scroll', handleScrollAnimation);
+
+// 导航菜单控制
+const menuToggle = document.querySelector('.menu-toggle');
+const navLinks = document.querySelector('.nav-links');
+
+menuToggle.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    menuToggle.classList.toggle('active');
+});
+
+// 导航链接高亮
+const navLinksArray = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('section');
+
+function setActiveLink() {
+    let current = '';
+    
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        if (pageYOffset >= (sectionTop - sectionHeight/3)) {
+            current = section.getAttribute('id');
+        }
+    });
+
+    navLinksArray.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href').slice(1) === current) {
+            link.classList.add('active');
+        }
+    });
+}
+
+window.addEventListener('scroll', setActiveLink);
+window.addEventListener('load', setActiveLink);

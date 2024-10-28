@@ -21,13 +21,17 @@
                 <span class="logo-text">The Wang</span>
             </a>
             <div class="nav-links">
-                <a href="#home">首页</a>
-                <a href="#about">关于</a>
-                <a href="#portfolio">作品</a>
-                <a href="#chat">对话</a>
+                <a href="#home" class="nav-link active">首页</a>
+                <a href="#portfolio" class="nav-link">作品</a>
+                <a href="#chat" class="nav-link">对话</a>
                 <a href="#" class="nav-search">
                     <i class="fas fa-search"></i>
                 </a>
+            </div>
+            <div class="menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
     </nav>
@@ -36,6 +40,7 @@
     <section class="hero" id="home">
         <div class="hero-content" id="heroContent">
             <h1 class="main-title">The Wang</h1>
+            <div class="scroll-hint">向下滚动探索更多</div>
         </div>
         <div class="hero-image">
             <div class="image-slider">
@@ -43,10 +48,7 @@
                 <div class="slide" style="background-image: url('images/2.png')"></div>
                 <div class="slide" style="background-image: url('images/3.png')"></div>
             </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <div class="arrow"></div>
+            <div class="slider-overlay"></div>
         </div>
     </section>
 
@@ -57,7 +59,30 @@
             <div class="section-content">
                 <h2>作品展示</h2>
                 <div class="portfolio-grid">
-                    <!-- 作品内容 -->
+                    <div class="portfolio-item">
+                        <img src="images/1.png" alt="作品1">
+                        <div class="portfolio-overlay">
+                            <h3>摄影作品一</h3>
+                            <p>自然风光摄影</p>
+                            <a href="#" class="view-more">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="images/2.png" alt="作品2">
+                        <div class="portfolio-overlay">
+                            <h3>摄影作品二</h3>
+                            <p>人文纪实摄影</p>
+                            <a href="#" class="view-more">查看详情</a>
+                        </div>
+                    </div>
+                    <div class="portfolio-item">
+                        <img src="images/3.png" alt="作品3">
+                        <div class="portfolio-overlay">
+                            <h3>摄影作品三</h3>
+                            <p>城市建筑摄影</p>
+                            <a href="#" class="view-more">查看详情</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -105,6 +130,16 @@
     <!-- 脚本引用 -->
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script src="main.js"></script>
+
+    <!-- 在 body 末尾添加图片预览模态框 -->
+    <div class="image-preview-modal" id="imagePreviewModal">
+        <span class="close-modal">&times;</span>
+        <img src="" alt="预览图" id="previewImage">
+        <div class="modal-nav">
+            <button class="prev-image"><i class="fas fa-chevron-left"></i></button>
+            <button class="next-image"><i class="fas fa-chevron-right"></i></button>
+        </div>
+    </div>
 </body>
 
 </html>
