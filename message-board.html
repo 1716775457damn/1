@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留言板 - 云鹰智巡</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="nav-logo">
+                <i class="fas fa-code"></i>
+                <span class="logo-text">云鹰智巡</span>
+            </a>
+            <div class="nav-links">
+                <a href="index.html">首页</a>
+                <a href="shop.html">商城</a>
+                <a href="portfolio.html">项目</a>
+                <a href="message-board.html" class="active">留言板</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="message-board-section">
+        <div class="message-board-container">
+            <h2>留言板</h2>
+            
+            <!-- 留言列表 -->
+            <div class="messages-container">
+                <div class="message-list" id="messageList">
+                    <!-- 留言将通过JavaScript动态添加 -->
+                </div>
+            </div>
+
+            <!-- 留言表单 -->
+            <form id="messageForm" class="message-form">
+                <div class="form-group">
+                    <label for="nickname">昵称</label>
+                    <input type="text" id="nickname" required>
+                </div>
+                <div class="form-group">
+                    <label for="messageContent">留言内容</label>
+                    <textarea id="messageContent" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">发表留言</span>
+                    <span class="loading-spinner"></span>
+                </button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-github"></i></a>
+            <a href="#"><i class="fab fa-weixin"></i></a>
+            <a href="#"><i class="fab fa-weibo"></i></a>
+        </div>
+        <p>&copy; 2024 云鹰智巡. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="message-board.js"></script>
+</body>
+</html> 
